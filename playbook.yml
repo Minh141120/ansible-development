@@ -1,0 +1,32 @@
+- hosts: web
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Log in to Docker Hub
+      community.docker.docker_login:
+        username: "{{ DOCKER_HUB_USERNAME }}"
+        password: "{{ DOCKER_HUB_PASSWORD }}"
+    - include_role:
+        name: web
+
+- hosts: api
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Log in to Docker Hub
+      community.docker.docker_login:
+        username: "{{ DOCKER_HUB_USERNAME }}"
+        password: "{{ DOCKER_HUB_PASSWORD }}"
+    - include_role:
+        name: api
+
+- hosts: db
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Log in to Docker Hub
+      community.docker.docker_login:
+        username: "{{ DOCKER_HUB_USERNAME }}"
+        password: "{{ DOCKER_HUB_PASSWORD }}"
+    - include_role:
+        name: db

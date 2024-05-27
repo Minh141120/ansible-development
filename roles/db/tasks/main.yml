@@ -1,0 +1,15 @@
+- name: Deploy DB service
+  community.docker.docker_container:
+    name: db_service
+    image: mysql:8.0
+    state: started
+    ports:
+      - "3307:3306"  # Changed port to avoid conflicts
+    env:
+      MYSQL_ROOT_PASSWORD: "{{ MYSQL_ROOT_PASSWORD }}"
+      MYSQL_DATABASE: "{{ MYSQL_DATABASE }}"
+      MYSQL_USER: "{{ MYSQL_USER }}"
+      MYSQL_PASSWORD: "{{ MYSQL_PASSWORD }}"
+    volumes:
+      - /Users/kuuhakuu/local/mysql_data:/var/lib/mysql
+    docker_host: "unix:///var/run/docker.sock"

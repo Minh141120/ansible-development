@@ -1,0 +1,10 @@
+- name: Deploy web service
+  community.docker.docker_container:
+    name: web_service
+    image: minhitptit/nnm-vdt2024-frontend-app:latest
+    state: started
+    ports:
+      - "3000:80"
+    env:
+      REACT_APP_BACKEND_URL: "http://localhost:8080"
+    docker_host: "unix:///var/run/docker.sock"
